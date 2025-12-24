@@ -7,7 +7,6 @@
     <% String currentPage = request.getServletPath(); %>
     <%     
 	    	String gameIdStr = request.getParameter("id");
-	        
 	        if (gameIdStr == null || gameIdStr.isEmpty()) 
 	        {
 	            response.sendRedirect("index.jsp");

@@ -1,32 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="connectionDB.Connect" %>
 
-<?php
-    // connection à la BD
-    include "db.php";
-
-    $query = mysqli_query($connection, "SELECT COUNT(`nom_produit`) AS `sum_produit`,`img`, `url`, `video`, `grid_placement` FROM `produits` GROUP BY `nom_produit` HAVING `img` IS NOT NULL AND CHAR_LENGTH(`img`) > 0 AND 
-                                                                                                                                                                         `url` IS NOT NULL AND CHAR_LENGTH(`url`) > 0 AND 
-                                                                                                                                                                         `video` IS NOT NULL AND CHAR_LENGTH(`video`) > 0 AND 
-                                                                                                                                                                         `grid_placement` IS NOT NULL AND CHAR_LENGTH(`grid_placement`) > 0");
-    
-    $result = $query -> fetch_all(MYSQLI_ASSOC);
-    $count_jeux = 0;
-    foreach ($result as $data) 
-    {
-        $count_jeux += $data['sum_produit'];
-    }
-
-    $query_1 = mysqli_query($connection, "SELECT `visuel`.`highlight`, `produits`.`prix_produit`, `produits`.`url`, `produits`.`nom_produit` FROM `visuel`, `produits` WHERE `produits`.`id_produit` = 7 and `produits`.`id_produit` = `visuel`.`id`");
-    $result_dogma = $query_1 -> fetch_assoc();
-    
-    session_start();
-    if(isset($_SESSION['user']))
-    {
-        // on réccupère les données de l'utilisateur
-        $user = $_SESSION['user'];
-    }
-?>
+	<% String currentPage = request.getServletPath(); 
+		if(currentPage != null && currentPage == "/lanzz_store_main.jsp") 
+		{
+	    	response.sendRedirect("lanzz_store_main.jsp");
+	    	return;
+		}
+	%>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,39 +16,79 @@
         <meta charset="utf-8">
         <title>Lanzz store</title>
         <link rel="stylesheet" href="style.css">
-        <?php include('header.php'); ?>
+         <%@include file="header.jsp" %>
     </head>
     <body>
+    	<%
+			try(Connection connection = Connect.getConnection())
+			{
+				String sql = 
+						"select count('nom_produit') as sum_produit, img, url, video, grid_placement " +
+						"from produits " +
+						"group by nom_produit, img, url, video, grid_placement " +
+						"having img is not null and char_length(img) > 0 " +
+						"and url is not null and char_length(url) > 0 " +
+						"and video is not null and char_length(video) > 0 " +
+						"and grid_placement is not null and char_length(grid_placement) > 0";
+				String sql_dogma =
+						"select v.highlight, p.prix_produit, p.url, p.nom_produit " + 
+						"from visuel v, produits p " +
+						"where p.nom_produit = 'Dragons Dogma 2' and p.nom_produit = v.jeu";
+				try(PreparedStatement pstmt = connection.prepareStatement(sql); PreparedStatement pstmt_dogma = connection.prepareStatement(sql_dogma))
+				{
+					try(ResultSet rs = pstmt.executeQuery(); ResultSet rs_dogma = pstmt_dogma.executeQuery())
+					{
+						if(rs_dogma.next())
+						{
+			
+		%>
         <div class="highlight_banner">
-            <img src="<?php echo $result_dogma['highlight']; ?>" id="highlights">
+            <img src="<%= rs_dogma.getString("highlight") %>" id="highlights">
             <div class="content">
-                <a href="<?php echo $result_dogma['url']; ?>" class="banner_title"><?php echo $result_dogma['nom_produit']; ?></a>
-                <div class="prix"><?php echo $result_dogma['prix_produit']; ?> €</div>
+                <a href="<%= rs_dogma.getString("url") %>" class="banner_title"><%= rs_dogma.getString("nom_produit") %></a>
+                <div class="prix"><%= rs_dogma.getFloat("prix_produit") %> €</div>
             </div>
         </div>
+        <% } %>
         <div id="body_menu_main">
+            <% 					
+		        while(rs.next())
+				{
+			%>
             <div class="top_side_main">
                 <fieldset>
                     <legend><b>Jeux les plus populaires en ce moment</b></legend>
                 </fieldset>
-                <?php echo "Il y'a : " . $count_jeux . " jeux pour l'instant"?>
+                <%
+					String sqlCountJeu = "SELECT COUNT(*) FROM produits";
+					try (Statement st = connection.createStatement(); ResultSet rsCount = st.executeQuery(sqlCountJeu)) 
+					{
+					    if (rsCount.next()) {int countJeu = rsCount.getInt(1); // result of count
+					
+				%>
+                <p>Il y'a : <%= countJeu %> jeux pour l'instant</p>
+                <% 
+                		}
+					}
+				%>
             </div>
-            <?php foreach ($result as $data): ?>
-            <div class="card_container <?php echo $data['grid_placement']; ?>">
+            <div class="card_container <%= rs.getString("grid_placement") %>">
                 <div class="card">
                     <div class="card_front">
-                        <img src="<?php echo $data['img']; ?>" class="games_icons">
+                        <img src="<%= rs.getString("img") %>" class="games_icons">
                     </div>
                     <div class="card_back">
-                        <a href="<?php echo $data['url']; ?>">
-                            <video muted preload="auto" autoplay="none" disablePictureInPicture poster ="<?php echo $data['img']; ?>" class="video_background_card">
-                                <source src="<?php echo $data['video']; ?>"/>
+                        <a href="<%= rs.getString("url") %>">
+                            <video muted preload="auto" autoplay="none" disablePictureInPicture poster ="<%= rs.getString("img") %>" class="video_background_card">
+                                <source src="<%= rs.getString("video") %>"/>
                             </video>
                         </a>
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <%
+				}
+            %>
             <div class="above_bottom_side_main">
             <input type="checkbox" id="checker">
                 <fieldset class="limited l-200">
@@ -140,5 +162,15 @@
                 <label for="checker" class="more_button"></label>
             </div>
         </div>
+        <%
+						}
+					}
+				}
+    		catch(Exception e)
+	    	{
+		        out.println("Erreur: " + e.getMessage());
+		        e.printStackTrace();
+	    	}
+		%>
     </body>
 </html>

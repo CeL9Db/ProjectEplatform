@@ -17,13 +17,13 @@ public class Connect {
 
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
             
-            System.out.println("--- Подключение к БД выполнено успешно ---");
+            System.out.println("!--- Connection to DB is successful ---!");
             
         } catch (ClassNotFoundException e) {
-            System.err.println("Ошибка: Драйвер PostgreSQL не найден в библиотеках проекта.");
+            System.err.println("Error - driver is not found.");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.err.println("Ошибка: Не удалось подключиться к БД (проверьте URL, логин или пароль).");
+            System.err.println("Error: not possible to connect to the DB.");
             System.err.println("SQL State: " + e.getSQLState());
             System.err.println("Message: " + e.getMessage());
         }
