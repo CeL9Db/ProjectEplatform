@@ -1,97 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import="connectionDB.Connect" %>
-
-
-	
-    <% String currentPage = request.getServletPath(); %>
-    <%     
-	    	String gameIdStr = request.getParameter("id");
-	        if (gameIdStr == null || gameIdStr.isEmpty()) 
-	        {
-	            response.sendRedirect("index.jsp");
-	            return;
-	        }
-	    	try(Connection connection = Connect.getConnection())
-	    	{
-	    		String sql = "SELECT visuel.*, produits.nom_produit, produits.prix_produit, produits.restriction_age, " +
-	    				"produits.date_sortie, fournisseurs.nom_fourn,fournisseurs.url_fourn, " +
-	    				"fournisseurs.img_fourn, createurs.nom_createur, type_produit.nom " +
-	    				"FROM produits " +
-                        "LEFT JOIN type_produit ON produits.code_type_produit = type_produit.id_type " +
-                        "LEFT JOIN fournisseurs ON produits.code_fourn = fournisseurs.id_fourn " +
-                        "LEFT JOIN createurs ON produits.code_createur = createurs.id_createur " +
-                        "LEFT JOIN visuel ON produits.id_produit = visuel.id " +
-                        "WHERE produits.id_produit = ?";
-	    		try (PreparedStatement pstmt = connection.prepareStatement(sql)) 
-	    		{
-	                pstmt.setInt(1, Integer.parseInt(gameIdStr));
-	                
-	            try (ResultSet rs = pstmt.executeQuery()) 
-	            {
-	            	if (rs.next()) 
-	            	{
-    %>
 
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title><%= rs.getString("nom_produit") %></title>
-        <link rel="stylesheet" href="style.css">
+        <title>${selectedJeu.nom_produit}</title>
+        <link rel="stylesheet" href="style/style.css">
+        <%@include file="header.jsp" %>
     </head>
     <body>
         <div class="highlight_banner">
-            <img src="<%= rs.getString("highlight") %>" id="highlights_absolute">
+            <img src="${selectedJeu.code_visuel.highlight}" id="highlights_absolute">
         </div>
         <div id="game_page">
             <div class="left_side_game">
-                <img src="<%= rs.getString("icon") %>" class="icon_jeu">
+                <img src="${selectedJeu.code_visuel.icon}" class="icon_jeu">
             </div>
             <div class="right_side_game">
                 <span>
-                	<%= rs.getString("nom_produit") %> - <%= rs.getString("nom_fourn") %>
+                	${selectedJeu.nom_produit} - ${selectedJeu.code_fourn.nom_fourn}
                     <hr>
                 </span>
                 <div class="sub_info">
                     <div>
-                        <a href="<%= rs.getString("url_fourn") %>">
-                        	<img src="<%= rs.getString("img_fourn") %>" class="icons_sous_bar" id="checkmark"></a>
+                        <a href="${selectedJeu.code_fourn.url_fourn}">
+                        	<img src="${selectedJeu.code_fourn.img_fourn}" class="icons_sous_bar" id="checkmark"></a>
                         <a>Téléchargement digital</a>
                         <form action="favor_page.jsp" method="post">
-                            <input type="hidden" name="id_jeu" value="<%= rs.getInt("id") %>">
+                            <%-- <input type="hidden" name="id_jeu" value="${selectedJeu.id_produit}"> --%>
                             <button type="submit" class="button">Ajouter au panier</button>
                         </form>
                     </div>
                     <div>
-                        <span>Développeur : <%= rs.getString("nom_createur") %></span>
-                        <span>Classification : <%= rs.getString("restriction_age") %></span>
-                        <span>Prix : <%= rs.getFloat("prix_produit") %> €</span>
-                        <span>Date sortie : <%= rs.getString("date_sortie") %></span>
-                        <span>Genre : <%= rs.getString("genre_nom") %></span>
+                        <span>Développeur : ${selectedJeu.code_createur.nom_createur}</span>
+                        <span>Classification : ${selectedJeu.restriction_age}</span>
+                        <span>Prix : ${selectedJeu.prix_produit} €</span>
+                        <span>Date sortie : ${selectedJeu.date_sortie}</span>
+                        <span>Genre : ${selectedJeu.code_type_produit.nom}</span>
                     </div>
                 </div>
             </div>
             <div class="visuels_game">
                 <div class="video_1">
                     <video preload="1" autoplay="none" controls disablePictureInPicture class="video_jeu_page">
-                        <source src="<%= rs.getString("video") %>">
+                        <source src="${selectedJeu.code_visuel.video}">
                     </video>
-                </div>
+                </div>             
                 <div class="photo_1">
-                    <img src="<%= rs.getString("img_1") %>" class="photo_jeu_page">
+                    <img src="${selectedJeu.code_visuel.img_1}" class="photo_jeu_page">
                 </div>
                 <div class="photo_2">
-                    <img src="<%= rs.getString("img_2") %>" class="photo_jeu_page">
+                    <img src="${selectedJeu.code_visuel.img_2}" class="photo_jeu_page">
                 </div>
                 <div class="photo_3">
-                    <img src="<%= rs.getString("img_3") %>" class="photo_jeu_page">
+                    <img src="${selectedJeu.code_visuel.img_3}" class="photo_jeu_page">
                 </div>
                 <div class="photo_4">
-                    <img src="<%= rs.getString("img_4") %>" class="photo_jeu_page">
+                    <img src="${selectedJeu.code_visuel.img_4}" class="photo_jeu_page">
                 </div>
                 <div class="photo_5">
-                    <img src="<%= rs.getString("img_5") %>" class="photo_jeu_page">
+                    <img src="${selectedJeu.code_visuel.img_5}" class="photo_jeu_page">
                 </div>
             </div>
             <div class="configuration_game">
@@ -131,15 +99,15 @@
                     <legend><b>actualités</b></legend>
                     <br><br>
                     <div class="actualite">
-                        <img src="<%= rs.getString("actualite_1") %>" class="photo_jeu_page">
+                        <img src="${selectedJeu.code_visuel.actualite_1}" class="photo_jeu_page">
                         <a href="https://www.jeuxvideo.com/news/1880964/un-joueur-d-elden-ring-aurait-decouvert-une-nouvelle-arme-cachee-dans-le-dlc-le-plus-attendu-de-l-annee-shadow-of-the-erdtree.htm"><span><b>Un joueur d'Elden Ring aurait découvert une nouvelle arme cachée dans le DLC le plus attendu de l'année, Shadow of the Erdtree</b> <br><br>Shadow of the Erdtree, le DLC d’Elden Ring, c’est pour bientôt. En attendant, les joueurs s’amusent à décortiquer (deux mois après sa sortie) le trailer de l’ajout de contenu. Voici une jolie trouvaille.</span></a>
                     </div>
                     <div class="actualite">
-                        <img src="<%= rs.getString("actualite_2") %>" class="photo_jeu_page">
+                        <img src="${selectedJeu.code_visuel.actualite_2}" class="photo_jeu_page">
                         <a href="https://www.jeuxvideo.com/news/1875034/elphael-elden-ring-comment-rejoindre-cette-zone.htm"><span><b>Elphael Elden Ring : Comment rejoindre cette zone ?</b> <br><br>Sur Elden Ring, certaines régions sont assez facilement trouvables quand d'autres vont avoir tendance à être bien plus cachées.</span></a>
                     </div>
                     <div class="actualite">
-                        <img src="<%= rs.getString("actualite_3") %>" class="photo_jeu_page">
+                        <img src="${selectedJeu.code_visuel.actualite_3}" class="photo_jeu_page">
                         <a href="https://www.jeuxvideo.com/news/1873965/masque-d-okina-elden-ring-comment-et-ou-recuperer-cette-piece-d-equipement.htm"><span><b>Masque d'Okina Elden Ring : Comment et où récupérer cette pièce d'équipement ?</b> <br><br>Sur Elden Ring, vous avez de nombreuses pièces d'équipement à récupérer. Si vous vous dirigez vers un build basé sur le saignement, vous allez sûrement vouloir obtenir le Masque d'Okina. Alors, dans cet article, on vous explique comment le récupérer.</span></a>
                     </div>
                 </fieldset>
@@ -213,17 +181,5 @@
                 <label for="checker" class="more_button"></label>
             </div>
         </div>
-        <%
-	        				}
-	            				else out.println("<h1>Ce jeu ne figure pas sur le site pour le moment !</h1>");
-	        			}
-	    			}		
-        		}
-	        catch (Exception e) 
-	        {
-		        out.println("Erreur: " + e.getMessage());
-		        e.printStackTrace();
-	    	}
-    %>
     </body>
 </html>

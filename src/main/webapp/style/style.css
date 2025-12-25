@@ -236,6 +236,7 @@ form
     display: flex;
     flex-direction: column;
     width: 100%;
+    
 }
 .content
 {
@@ -254,8 +255,8 @@ form
     margin-inline-start: calc(125px + (450 - 125) * ((100vw - 500px) / (2560 - 500)));
     margin-inline-end: calc(220px + (1640 - 220) * ((100vw - 500px) / (2560 - 500)));
     /* background-color: #2AA5A0; */
-    /* background-image: linear-gradient(90deg, #5e3b14, #81725e, #aeac8d, #817d53); */
-    background-image: linear-gradient(90deg, #23313c, #778c9e, #818da0, #9eb3c5);
+    background-image: linear-gradient(90deg, #5e3b14, #81725e, #aeac8d, #817d53);
+    /*background-image: linear-gradient(90deg, #23313c, #778c9e, #818da0, #9eb3c5); */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
