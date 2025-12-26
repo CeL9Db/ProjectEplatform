@@ -42,7 +42,7 @@
             </div>
             <div class="visuels_game">
                 <div class="video_1">
-                    <video preload="1" autoplay="none" controls disablePictureInPicture class="video_jeu_page">
+                    <video preload="1" autoplay="0" controls disablePictureInPicture class="video_jeu_page">
                         <source src="${selectedJeu.code_visuel.video}">
                     </video>
                 </div>             
