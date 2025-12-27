@@ -41,8 +41,20 @@
                     <legend><b>Comment nous contacter?</b></legend>
                     <ul class="bottom_etmini_info">
                         <li class="liste_abc_none_style"><a href="http://localhost/myhost-exemple/condition_de_vente.php">Les conditions de vente</a></li>
-                                <li class="liste_abc_none_style"><a href="http://localhost/myhost-exemple/assistance_page.php">Contactez-nous</a></li>
-                        <li class="liste_abc_none_style"><a href="http://localhost/myhost-exemple/politique_de_confidentialite.php">Politique de confidentialité</a></li>
+						<c:choose>
+						    <c:when test="${not empty sessionScope.session and sessionScope.session.loged}">
+						        <li class="liste_abc_none_style">
+						            <a href="/assistance_page">Contactez-nous</a>
+						        </li>
+						    </c:when>
+						
+						    <c:otherwise>
+						        <li class="liste_abc_none_style">
+						            Vous n'êtes pas connecté à votre compte pour écrire un message d'assistance !
+						        </li>
+						    </c:otherwise>
+						</c:choose>
+                        <li class="liste_abc_none_style"><a href="/politique_de_confidentialite">Politique de confidentialité</a></li>
                         <br><hr>
                         <li class="liste_abc_none_style">Copyright © 2024 Lanzz Store - All rights reserved</li>
                     </ul>

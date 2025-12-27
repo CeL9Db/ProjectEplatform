@@ -18,10 +18,12 @@
                     <legend><b>Menu</b></legend>
                     <hr>
                 </fieldset>
-                <a href="personal_page.jsp">Mon information</a>
-                <a href="personal_page_cle.jsp">Tes clès achetés</a>
-                <a href="personal_page_commentaire_support.jsp">Commentaire</a>
-                <a href="personal_page_histoire.jsp">Histoire des achats</a>
+                <%-- 
+               	<a href="/personalPage">Mon information</a>
+                <a href="/personalPageCle">Tes clès achetés</a>
+                <a href="/personalPageCommSup">Commentaire</a>
+                <a href="/personalPageHistory">Histoire des achats</a>
+                --%>
             </div>
             <div class="dashboard">
                 <div class="produit_container">
@@ -38,7 +40,7 @@
                                 <li>status: ${user.loged }</li>
                             </ul>
                         </div>
-                        <a href="http://localhost/myhost-exemple/lanzz_store_main.php"><img src="Icons_complémentaire/add.svg" class="icons_sous_bar">Voir plus de jeux</a>
+                        <a href="/"><img src="Icons_complémentaire/add.svg" class="icons_sous_bar">Voir plus de jeux</a>
                     </div>
                 </div>
             </div>
@@ -47,14 +49,14 @@
                     <legend><b>Complémentaire</b></legend>
                     <hr>
                 </fieldset>
-                <a href="http://localhost/myhost-exemple/lanzz_store_main.php"><img src="Icons_complémentaire/buy.svg" class="icons_sous_bar"> Acheter des produits</a>
+                <a href="/"><img src="Icons_complémentaire/buy.svg" class="icons_sous_bar"> Acheter des produits</a>
                 <span><hr></span>
                 <fieldset class="links_stores_partenaires">
-                    <a href="https://www.instant-gaming.com/fr/"><img src="Icons_complémentaire/instant_gaming_logo.svg" class="icons_sous_bar"></a>
+                    <a href="https://www.instant-gaming.com/fr/"><img src="icons/instant_gaming_logo.svg" class="icons_sous_bar"></a>
                     <a href="<?php echo $result['url_fourn']; ?>"><img src="<?php echo $result['img_fourn']; ?>" class="icons_sous_bar"> </a>
                     <hr>
                 </fieldset>
-                <a href="logout.php"><img src="Icons_complémentaire/logout.svg" class="icons_sous_bar">Logout</a>
+                <a href="/logout"><img src="Icons_complémentaire/logout.svg" class="icons_sous_bar">Logout</a>
             </div>
         </div>
     </body>

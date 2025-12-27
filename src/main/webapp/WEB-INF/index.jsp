@@ -26,7 +26,7 @@
                         <a href="${selectedJeu.code_fourn.url_fourn}">
                         	<img src="${selectedJeu.code_fourn.img_fourn}" class="icons_sous_bar" id="checkmark"></a>
                         <a>Téléchargement digital</a>
-                        <form action="favor_page.jsp" method="post">
+                        <form action="/favorPage" method="post">
                             <%-- <input type="hidden" name="id_jeu" value="${selectedJeu.id_produit}"> --%>
                             <button type="submit" class="button">Ajouter au panier</button>
                         </form>
@@ -42,7 +42,7 @@
             </div>
             <div class="visuels_game">
                 <div class="video_1">
-                    <video preload="1" autoplay="0" controls disablePictureInPicture class="video_jeu_page">
+                    <video preload="auto" autoplay muted loop controls disablePictureInPicture class="video_jeu_page">
                         <source src="${selectedJeu.code_visuel.video}">
                     </video>
                 </div>             
@@ -115,7 +115,7 @@
 
             <div class="commentaire">
                 <div class="container_login">
-                    <form action="commentaire.php" method="post">
+                    <form action="/commentaire" method="post">
                         <label for="commentaire_jeu">Laisser nous votre petit commentaire sur ce jeu :]</label>
                         <span class="block_login">
                             <input type="text" placeholder="..." name="commentaire_jeu" required class="input_login">

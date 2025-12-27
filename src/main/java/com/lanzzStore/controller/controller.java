@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ public class controller
 	private JeuInterface repos;
 	@Autowired
 	private ClientInterface repos_client;
+	@Autowired
+	private PasswordEncoder cryptePass;
 	
 	@GetMapping("/")
 	public String lanzz_store_main(Model model)
@@ -49,9 +52,23 @@ public class controller
 	}
 	
 	@PostMapping("/register")
-	public String submitForm(@ModelAttribute("user") Client client)
+	public String submitForm(@ModelAttribute("user") Client client, Model model)
 	{
-		return "register_page";
+		if(repos_client.findByEmail(client.getEmail()).orElse(null) != null)
+		{
+			model.addAttribute("error_inscription", "this email's already exists");
+			return "register_page";
+		}
+		else
+		{
+			// on récupere le mot de passe -> crypt password -> set le nouveau créé -> enregistrement du nouveau client
+			String clientPass = client.getPassword();
+			String cryptedPass = cryptePass.encode(clientPass);
+			client.setPassword(cryptedPass);
+			
+			repos_client.save(client);
+			return "redirect:/personal_page";
+		}
 	}
 	
 	@PostMapping("/login")
@@ -60,7 +77,7 @@ public class controller
 						  @RequestParam("password") String password,
 						  Model model,
 						  HttpSession session
-						 )
+					   )
 	{
 		Client user = repos_client.findByEmail(email).orElse(null);
 		if(user != null && user.getPassword().equals(password))
@@ -75,7 +92,7 @@ public class controller
 		{
 			// if not we say that smth went wrong with his info
 			System.out.println("User is not found. Please register yourself");
-			model.addAttribute("error_connection", "something went wrong");
+			model.addAttribute("error_connection", "something went wrong, try agail...");
 			return "login_page";
 		}
 	}
@@ -88,13 +105,32 @@ public class controller
 		return "register_page";
 	}
 	@GetMapping("/loginPage")
-	public String showFormLogin()
-	{
-		return "login_page";
-	}
-//	@GetMapping("/personal_page")
-//	public String showPersonelPage(Model model, HttpSession session)
-//	{
-//		// a finir + a finir register_page et son controlleur
-//	}
+	public String showFormLogin() {return "login_page";}
+	@GetMapping("/personalPage")
+	public String directPersonalPage() {return "personal_page";}
+	@GetMapping("/personalPageCle")
+	public String directPersonalPageCle() {return "personal_page_cle";}
+	@GetMapping("/personalPageCommSup")
+	public String directPersonalPageCommSup() {return "personal_page_CommSup";}
+	@GetMapping("/personalPageHistory")
+	public String directPersonalPageHistory() {return "personal_page_histoire";}
+	
+	//////////////////////////////////
+	// complete the logout processus
+	//@GetMapping("/logout")
+	//public String directLogout() {return "lanzz_store_main";}
+	// complete the commantaire processus
+	//@GetMapping("/commentaire")
+	//public String directCommentaire() {return "commentaire_page";}
+	// complete the personalPage
+	//@GetMapping("/personalPage")
+	//public String PersonalPage()
+	//////////////////////////////////
+	
+	@GetMapping("/assistance_page")
+	public String directAssistPage() {return "assistance_page";}
+	@GetMapping("/politique")
+	public String directPolitique() {return "politique_de_confidentialite";}
+	@GetMapping("/favorPage")
+	public String directFavorite() {return "favor_page";}
 }
