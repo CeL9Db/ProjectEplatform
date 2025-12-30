@@ -8,7 +8,7 @@
     <span class="right_headline">
         <a href="/favor_page"><img src="icons/buy.svg" class="favor_page_link"></a>
         <c:choose>
-        	<c:when test = ${not empty sessionScope.session and sessionScope.session.loged}>
+        	<c:when test = "${not empty sessionScope.session and sessionScope.session.loged}">
         		<a href="/loginPage"><img src="icons/avatar2.svg" class="button_pers_page"></a>
         	</c:when>
         	<c:otherwise>
