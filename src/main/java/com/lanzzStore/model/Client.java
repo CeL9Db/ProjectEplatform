@@ -1,6 +1,8 @@
 package com.lanzzStore.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,14 +11,15 @@ import jakarta.persistence.Table;
 public class Client 
 {
 	@Id
-	private int id_client; 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id_client; 
 	private	String nickname;
 	private String email;
 	private String password;
 	
 	public Client() {}
 
-	public int getId_client() {return id_client;}
+	public Integer getId_client() {return id_client;}
 	public void setId_client(int id_client) {this.id_client = id_client;}
 	public String getNickname() {return nickname;}
 	public void setNickname(String nickname) {this.nickname = nickname;}

@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <title>${selectedJeu.nom_produit}</title>
         <link rel="stylesheet" href="style/style.css">
+        <script src="JS/anim.js"></script>
         <%@include file="header.jsp" %>
     </head>
     <body>
@@ -26,10 +27,7 @@
                         <a href="${selectedJeu.code_fourn.url_fourn}">
                         	<img src="${selectedJeu.code_fourn.img_fourn}" class="icons_sous_bar" id="checkmark"></a>
                         <a>Téléchargement digital</a>
-                        <form action="/favorPage" method="post">
-                            <%-- <input type="hidden" name="id_jeu" value="${selectedJeu.id_produit}"> --%>
-                            <button type="submit" class="button">Ajouter au panier</button>
-                        </form>
+                        <button onclick="addToPanier(${selectedJeu.id})" class=more_button>Ajouter au panier</button>
                     </div>
                     <div>
                         <span>Développeur : ${selectedJeu.code_createur.nom_createur}</span>
@@ -176,10 +174,12 @@
                             que possible, et la procédure d'achat devient incroyablement facile.
                         </li>
                     </ul>
-                    <div class="bottom"></div>
+                  
                 </fieldset>
                 <label for="checker" class="more_button"></label>
             </div>
         </div>
+                    <br><hr>
+       	    <span class="liste_abc_none_style">Copyright © 2024 Lanzz Store - All rights reserved</span>
     </body>
 </html>

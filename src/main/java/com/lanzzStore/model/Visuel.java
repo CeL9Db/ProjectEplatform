@@ -48,6 +48,5 @@ public class Visuel
 	public String getActualite_2() {return actualite_2;}
 	public void setActualite_2(String actualite_2) {this.actualite_2 = actualite_2;}
 	public String getActualite_3() {return actualite_3;}
-	public void setActualite_3(String actualite_3) {this.actualite_3 = actualite_3;}
-	
+	public void setActualite_3(String actualite_3) {this.actualite_3 = actualite_3;}	
 }

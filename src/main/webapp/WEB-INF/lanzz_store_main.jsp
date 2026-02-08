@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
-	
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -10,8 +8,9 @@
         <title>Lanzz store</title>
         <link rel="stylesheet" href="style/style.css">
         <%@include file="header.jsp" %>
+        <script src="JS/anim.js"></script>
     </head>
-    <body>	
+    <body>
         <div class="highlight_banner">
             <img src="${promotedJeu.code_visuel.highlight}" id="highlights">
             <div class="content">
@@ -19,17 +18,17 @@
                 <div class="prix">${promotedJeu.prix_produit} €</div>
             </div>
         </div>
+        <div class="top_side_main">
+        	<fieldset>
+                <legend><b>Jeux les plus populaires en ce moment</b></legend>
+            </fieldset>
+        </div>
         <div id="body_menu_main">
             <c:forEach items="${Jeux}" var="jeu">
-            <div class="top_side_main">
-                <fieldset>
-                    <legend><b>Jeux les plus populaires en ce moment</b></legend>
-                </fieldset>
-            </div>
-            <div class="card_container ${jeu.grid_placement}">
+            <div class="card_container">
                 <div class="card">
                     <div class="card_front">
-                        <img src="${jeu.img}" class="games_icons">
+                        <img src="${jeu.img}" class="games_icons" alt="${jeu.nom_produit}">
                     </div>
                     <div class="card_back">
                         <a href="/selectedJeu?id=${jeu.id}">
@@ -41,6 +40,7 @@
                 </div>
             </div>
             </c:forEach>
+    	</div>
             <div class="above_bottom_side_main">
             <input type="checkbox" id="checker">
                 <fieldset class="limited l-200">
@@ -92,35 +92,11 @@
                             que possible, et la procédure d'achat devient incroyablement facile.
                         </li>
                     </ul>
-            <div class="bottom_side_main">
-                <fieldset>
-                    <legend><b>LANZZ STORE</b></legend>
-                    <ul class="bottom_etmini_info">
-                        <li class="liste_abc_none_style"><a href="http://localhost/myhost-exemple/condition_de_vente.php">Les conditions de vente</a></li>
-						<c:choose>
-						    <c:when test="${not empty sessionScope.session and sessionScope.session.loged}">
-						        <li class="liste_abc_none_style">
-						            <a href="/assistance_page">Contactez-nous</a>
-						        </li>
-						    </c:when>
-						
-						    <c:otherwise>
-						        <li class="liste_abc_none_style">
-						            Vous n'êtes pas connecté à votre compte pour écrire un message d'assistance !
-						        </li>
-						    </c:otherwise>
-						</c:choose>
-                        <li class="liste_abc_none_style"><a href="/politique_de_confidentialite">Politique de confidentialité</a></li>
-                        <br><hr>
-                        <li class="liste_abc_none_style">Copyright © 2024 Lanzz Store - All rights reserved</li>
-                    </ul>
-                </fieldset>
-            </div>
-            <div class="bottom"></div>
+                  
                 </fieldset>
                 <label for="checker" class="more_button"></label>
             </div>
-        </div>
-       
+       		            <br><hr>
+       	    <span class="liste_abc_none_style">Copyright © 2024 Lanzz Store - All rights reserved</span>
     </body>
 </html>

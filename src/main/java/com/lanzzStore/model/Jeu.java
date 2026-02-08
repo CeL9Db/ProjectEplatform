@@ -11,26 +11,31 @@ public class Jeu
 	@Id
 	private int id_produit;
 	private String nom_produit;
+	
 	@ManyToOne
 	@JoinColumn(name="code_type_produit")
 	private Type_produit code_type_produit;
 	private float prix_produit;
 	private String restriction_age;
 	private String date_sortie;
+	
 	@ManyToOne
 	@JoinColumn(name="code_fourn")
 	private Fournisseur code_fourn;
+	
 	@ManyToOne
 	@JoinColumn(name="code_createur")
 	private Createur code_createur;
 	private String img;
 	private String url;
 	private String video;
+	
 	@ManyToOne
 	@JoinColumn(name="code_commentaire")
 	private Commentaire code_commentaire;
 	private String grid_placement;
 	private String link_telechargement;
+	
 	@OneToOne
 	@JoinColumn(name="code_visuel")
 	private Visuel code_visuel;

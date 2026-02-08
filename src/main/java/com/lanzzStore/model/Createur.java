@@ -4,7 +4,7 @@ import jakarta.persistence.Id;
 
 @Entity
 @Table(name="createurs")
-public class Createur 
+public class Createur
 {
 	@Id
 	private int id_createur;
