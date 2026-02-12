@@ -9,7 +9,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Page d'inscription</title>
         <%@include file="header.jsp"%>
-        <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
 

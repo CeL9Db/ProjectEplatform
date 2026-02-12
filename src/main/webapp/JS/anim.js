@@ -68,8 +68,10 @@ function addToPanier(id_produit)
     fetch('/addToFav?id_produit=' + id_produit, {method: 'POST'})
         .then(response => response.json())
         .then(panierItems => {
-            /////////////////// à changer l'alert par qqchose de plus beau ///////////////////
-            alert("Jeu ajouté !");
+            Toastify({
+                text: "Jeu ajouté à votre panier !",
+                duration: 3000
+                }).showToast();
         
             // on update le petit count des jeux présents dans le panier
             let count = document.getElementById("cart-count");
@@ -110,3 +112,38 @@ function updateMiniCartHtml(items) {
         container.insertAdjacentHTML('beforeend', html);
     });
 }
+
+    /*  ////////////////////////////////////////////
+            PERSONAL PAGE ANIMATIONS
+        //////////////////////////////////////////// */
+
+// Reveal elements on personal page with smooth animation
+const persPageElements = document.querySelectorAll('#pers_page .side_bar, .dashboard, .complementaire, .produit_container');
+if (persPageElements.length > 0) 
+    {
+    persPageElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+    });
+
+    const persPageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.transition = 'all 0.6s ease';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                persPageObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    persPageElements.forEach(el => persPageObserver.observe(el));
+}
+
+// Add hover effect to personal page links
+const persPageLinks = document.querySelectorAll('.side_bar a, .complementaire a');
+persPageLinks.forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.3s ease';
+    });
+});

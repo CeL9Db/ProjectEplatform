@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<!-- CSS Files -->
+<link rel="stylesheet" href="style/layout/main.css">
+<link rel="stylesheet" href="style/components/animations.css">
+<link rel="stylesheet" href="style/components/header.css">
+<link rel="stylesheet" href="style/components/home.css">
+<link rel="stylesheet" href="style/components/game-page.css">
+<link rel="stylesheet" href="style/components/personal-page.css">
+<link rel="stylesheet" href="style/components/cart.css">
+<link rel="stylesheet" href="style/components/buttons.css">
+<link rel="stylesheet" href="style/components/forms.css">
+<link rel="stylesheet" href="style/layout/responsive.css">
+
 <span id="headline_menu">
     <a href="/"><img src="icons/logo_official.jpg" class="logo"></a>
     <span class="name_logo">Lanzz Store</span>

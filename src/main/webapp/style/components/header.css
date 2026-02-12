@@ -1,0 +1,85 @@
+/* HEADER */
+#headline_menu {
+    display: grid;
+    grid-template-areas: "logo name_logo middle_headline right_headline";
+    grid-template-columns: 0.3fr 0.45fr 1fr 0.5fr;
+    width: 100%;
+    height: calc(12px + (150 - 12) * ((100vw - 500px) / (2560 - 500)));
+    min-height: 80px;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(51, 56, 57);
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.199);
+    position: sticky;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+}
+
+.name_logo {
+    grid-area: name_logo;
+    position: relative;
+    animation: slide-in-left 0.8s ease-out;
+    font-size: calc(25px + (40 - 25) * ((100vw - 500px) / (2560 - 500)));
+    font-weight: bold;
+    color: #e0c4a1;
+}
+
+.right_headline {
+    display: flex;
+    justify-content: space-around;
+    grid-area: right_headline;
+    align-items: center;
+}
+
+.search {
+    position: relative;
+    animation: slide-in-down 0.8s ease-out;
+    grid-area: middle_headline;
+    background-color: rgba(255, 255, 255, 0.19);
+    font-size: calc(10px + (20 - 10) * ((100vw - 500px) / (2560 - 500)));
+    color: #F5F5F5;
+    padding-left: 10px;
+    border: none;
+    border-radius: calc(10px + (50 - 10) * ((100vw - 500px) / (2560 - 500)));
+    height: calc(15px + (55 - 15) * ((100vw - 500px) / (2560 - 500)));
+    width: calc(250px + (700 - 250) * ((100vw - 500px) / (2560 - 500)));
+    min-height: 45px;
+}
+
+.search:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.4s ease-in-out;
+}
+
+.search:focus {
+    background-color: #6b43ff;
+    outline: none;
+}
+
+.favor_page_link, .button_pers_page {
+    position: relative;
+    animation: bounce-in 0.6s ease-out;
+    transition: all 0.4s ease-in-out;
+    height: calc(50px + (100 - 50) * ((100vw - 500px) / (2560 - 500)));
+    width: calc(50px + (100 - 50) * ((100vw - 500px) / (2560 - 500)));
+}
+
+.button_pers_page {
+    border-radius: calc(64px + (128 - 64) * ((100vw - 500px) / (2560 - 500)));
+}
+
+.logo {
+    grid-area: logo;
+    position: relative;
+    animation: scale-fade-in 0.8s ease-out;
+    margin-left: calc(25px + (50 - 25) * ((100vw - 500px) / (2560 - 500)));
+    margin-right: calc(30px + (80 - 30) * ((100vw - 500px) / (2560 - 500)));
+    height: calc(50px + (120 - 50) * ((100vw - 500px) / (2560 - 500)));
+    width: calc(50px + (120 - 50) * ((100vw - 500px) / (2560 - 500)));
+    border-radius: calc(64px + (128 - 64) * ((100vw - 500px) / (2560 - 500)));
+}
+
+.logo:hover, .button_pers_page:hover, .favor_page_link:hover {
+    transform: scale(1.05);
+}

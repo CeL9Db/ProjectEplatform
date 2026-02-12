@@ -7,7 +7,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Politique de confidentialité</title>
-        <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
         <%@include file="header.jsp" %>

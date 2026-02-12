@@ -5,7 +5,6 @@
     <head>
         <meta charset="utf-8">
         <title>${selectedJeu.nom_produit}</title>
-        <link rel="stylesheet" href="style/style.css">
         <script src="JS/anim.js"></script>
         <%@include file="header.jsp" %>
     </head>
@@ -179,7 +178,7 @@
                 <label for="checker" class="more_button"></label>
             </div>
         </div>
-                    <br><hr>
-       	    <span class="liste_abc_none_style">Copyright © 2024 Lanzz Store - All rights reserved</span>
+        <br><hr>
+       	<span class="liste_abc_none_style">Copyright © 2024 Lanzz Store - All rights reserved</span>
     </body>
 </html>

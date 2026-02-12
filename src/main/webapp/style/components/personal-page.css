@@ -1,0 +1,204 @@
+/* PERSONAL PAGE */
+.separateur {
+    height: 80px;
+    width: 100%;
+}
+
+#pers_page {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    gap: 30px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.side_bar {
+    background: linear-gradient(135deg, rgba(107, 67, 255, 0.1) 0%, rgba(107, 67, 255, 0.05) 100%);
+    border: 1px solid rgba(107, 67, 255, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.side_bar fieldset {
+    margin-bottom: 20px;
+}
+
+.side_bar legend {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.side_bar a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.side_bar a:hover {
+    background: rgba(107, 67, 255, 0.3);
+    color: #6b43ff;
+    transform: translateX(5px);
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.produit_container {
+    background: linear-gradient(135deg, rgba(107, 67, 255, 0.1) 0%, rgba(107, 67, 255, 0.05) 100%);
+    border: 1px solid rgba(107, 67, 255, 0.3);
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.produit_container fieldset {
+    margin-bottom: 25px;
+}
+
+.produit_container legend {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.produit_container h1 {
+    font-size: 1.5rem;
+    margin: 20px 0 15px 0;
+    color: #F5F5F5;
+}
+
+.produit_container ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.produit_container li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.produit_container li:last-child {
+    border-bottom: none;
+}
+
+.produit_container li strong {
+    color: #6b43ff;
+    font-weight: 600;
+}
+
+.produit_container a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #6b43ff;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.produit_container a:hover {
+    background: #5222fd;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 67, 255, 0.3);
+}
+
+.complementaire {
+    background: linear-gradient(135deg, rgba(107, 67, 255, 0.1) 0%, rgba(107, 67, 255, 0.05) 100%);
+    border: 1px solid rgba(107, 67, 255, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.complementaire fieldset {
+    margin-bottom: 20px;
+}
+
+.complementaire legend {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.complementaire a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.complementaire a:hover {
+    background: rgba(107, 67, 255, 0.3);
+    color: #6b43ff;
+    transform: translateX(5px);
+}
+
+.links_stores_partenaires {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: none;
+    align-items: center;
+}
+
+.links_stores_partenaires a {
+    justify-content: center;
+    align-items: center;
+    padding: 20px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    min-height: 100px;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+}
+
+.links_stores_partenaires a:hover {
+    background: rgba(107, 67, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.links_stores_partenaires img {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.complementaire > a:last-of-type {
+    color: #ff4d4d;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 77, 77, 0.3);
+}
+
+.complementaire > a:last-of-type:hover {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff6666;
+}

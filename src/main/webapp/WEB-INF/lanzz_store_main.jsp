@@ -6,7 +6,6 @@
     <head>
         <meta charset="utf-8">
         <title>Lanzz store</title>
-        <link rel="stylesheet" href="style/style.css">
         <%@include file="header.jsp" %>
         <script src="JS/anim.js"></script>
     </head>

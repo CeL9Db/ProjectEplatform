@@ -132,14 +132,33 @@ public List<Jeu> addToPanier(@RequestParam("id_produit") int id_produit, HttpSes
 	@GetMapping("/loginPage")
 	public String showFormLogin() {return "login_page";}
 	@GetMapping("/personalPage")
-	public String directPersonalPage() {return "personal_page";}
+	public String directPersonalPage(HttpSession session, Model model) 
+	{
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		model.addAttribute("userSession", userSession);
+		return "personal_page";
+	}
 	@GetMapping("/personalPageCle")
-	public String directPersonalPageCle() {return "personal_page_cle";}
+	public String directPersonalPageCle(HttpSession session, Model model) 
+	{
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		model.addAttribute("userSession", userSession);
+		return "personal_page_cle";
+	}
 	@GetMapping("/personalPageCommSup")
-	public String directPersonalPageCommSup() {return "personal_page_CommSup";}
+	public String directPersonalPageCommSup(HttpSession session, Model model) 
+	{
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		model.addAttribute("userSession", userSession);
+		return "personal_page_CommSup";
+	}
 	@GetMapping("/personalPageHistory")
-	public String directPersonalPageHistory() {return "personal_page_histoire";}
-	
+	public String directPersonalPageHistory(HttpSession session, Model model) 
+	{
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		model.addAttribute("userSession", userSession);
+		return "personal_page_histoire";
+	}
 	//////////////////////////////////
 	// complete the logout processus
 	//@GetMapping("/logout")

@@ -1,0 +1,94 @@
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 768px) {
+
+    #pers_page {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .side_bar, .complementaire {
+        position: static;
+        top: auto;
+    }
+
+    #headline_menu {
+        grid-template-areas:
+            "logo name_logo"
+            "middle_headline middle_headline"
+            "right_headline right_headline";
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    #game_page {
+        grid-template-areas:
+            "left" "right" "visu" "config" "news" "comment" "footer";
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .container_login {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .video_jeu_page, .photo_jeu_page, #highlights, #highlights_absolute {
+        width: 100%;
+        height: auto;
+    }
+
+    .actualite {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .produit {
+        grid-template-areas:
+            "image info"
+            "image price"
+            "action action";
+        grid-template-columns: 80px 1fr;
+    }
+
+    .delete-btn {
+        text-align: center;
+    }
+
+    .resume_calc {
+        position: static;
+        width: 100%;
+        flex: none;
+    }
+
+    .payement_page {
+        grid-template-columns: 1fr;
+        grid-template-areas: initial;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    #body_menu_main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #body_menu_main {
+        grid-template-columns: 1fr;
+    }
+
+    .sub_info {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .sub_info > div:first-child,
+    .sub_info > div:last-child {
+        border: none;
+        padding: 0;
+    }
+}
