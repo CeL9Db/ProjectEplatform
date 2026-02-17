@@ -1,0 +1,43 @@
+/* BUTTONS */
+.button {
+    width: 100%;
+    margin-top: 30px;
+    background: #6b43ff;
+    color: #fff;
+    border: none;
+    line-height: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 800;
+    border-radius: 8px;
+}
+
+.button:hover {
+    background: #5222fd;
+}
+
+.more_button {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    color: #F5F5F5;
+    background-color: #6b43ff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.199);
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.more_button:hover {
+    background-color: #5222fd;
+    transform: scale(1.05);
+}
+
+#checker ~ .more_button:before {
+    content: 'Lire la suite »';
+}
+
+#checker:checked ~ .more_button:before {
+    content: 'Réduire «';
+}

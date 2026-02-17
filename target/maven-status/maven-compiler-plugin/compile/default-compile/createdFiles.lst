@@ -1,0 +1,13 @@
+com\lanzzStore\model\Type_produit.class
+com\lanzzStore\model\Visuel.class
+com\lanzzStore\model\Jeu.class
+com\lanzzStore\model\Client.class
+com\lanzzStore\model\Createur.class
+com\lanzzStore\controller\controller.class
+com\lanzzStore\interfaces\JeuInterface.class
+com\lanzzStore\model\Commentaire.class
+com\lanzzStore\interfaces\ClientInterface.class
+com\lanzzStore\LanzzPlatform.class
+com\lanzzStore\model\UserSession.class
+com\lanzzStore\config\Securitycfg.class
+com\lanzzStore\model\Fournisseur.class

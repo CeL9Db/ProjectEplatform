@@ -1,0 +1,138 @@
+/* MAIN BODY */
+#body_menu_main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: calc(35px + (250 - 35) * ((100vw - 500px) / (2560 - 500)));
+    margin-right: calc(35px + (250 - 35) * ((100vw - 500px) / (2560 - 500)));
+    margin-top: 0px;
+    margin-bottom: calc(25px + (75 - 25) * ((100vw - 500px) / (2560 - 500)));
+    padding: calc(5px + (25 - 5) * ((100vw - 500px) / (2560 - 500)));
+    justify-items: center;
+    gap: calc(5px + (35 - 5) * ((100vw - 500px) / (2560 - 500)));
+    background: rgba(0, 0, 0, 0.164);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.199);
+    text-align: center;
+}
+
+.highlight_banner {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.highlight_banner img {
+    transition: transform 0.1s linear;
+    transform: scale(1.1);
+}
+
+.content {
+    font-size: calc(15px + (50 - 15) * ((100vw - 500px) / (2560 - 500)));
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: flex-start;
+    position: absolute;
+    width: 100%;
+    height: calc(200px + (900 - 200) * ((100vw - 500px) / (2560 - 500)));
+    z-index: 10;
+}
+
+.content .banner_title, .content .prix {
+    margin-inline-start: calc(125px + (450 - 125) * ((100vw - 500px) / (2560 - 500)));
+    margin-inline-end: calc(220px + (1640 - 220) * ((100vw - 500px) / (2560 - 500)));
+    width: fit-content;
+}
+
+#highlights {
+    position: relative;
+    display: flex;
+    height: calc(200px + (900 - 200) * ((100vw - 500px) / (2560 - 500)));
+    width: 100%;
+    clip-path: polygon(0.2% 5%, 100% 10%, 900% 75%, 75% 75%, 75% 100%, 60% 75%, 20% 80%);
+    object-fit: cover;
+}
+
+#highlights_absolute {
+    top: 50px;
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    height: calc(400px + (1100 - 400) * ((100vw - 500px) / (2560 - 500)));
+    width: 100%;
+    clip-path: polygon(0.2% 5%, 100% 10%, 900% 75%, 75% 75%, 75% 100%, 60% 75%, 20% 80%);
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.top_side_main, .above_bottom_side_main {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.164);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.199);
+    border-radius: 15px;
+    padding: 20px;
+    margin-left: calc(35px + (250 - 35) * ((100vw - 500px) / (2560 - 500)));
+    margin-right: calc(35px + (250 - 35) * ((100vw - 500px) / (2560 - 500)));
+    margin-bottom: calc(25px + (75 - 25) * ((100vw - 500px) / (2560 - 500)));
+}
+
+/* --- JEUX / CARDS --- */
+.card_container {
+    position: relative;
+    height: calc(150px + (500 - 125) * ((100vw - 500px) / (2560 - 500)));
+    width: calc(115px + (375 - 83.4) * ((100vw - 500px) / (2560 - 500)));
+}
+
+.card_container:hover .card {
+    transform: rotateY(180deg);
+    transition: all 0.5s ease;
+}
+
+.card {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.card_front, .card_back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    top: 0; left: 0;
+}
+
+.card_back {
+    transform: rotateY(-180deg);
+    background-color: #2c2f33;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.games_icons {
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.video_background_card {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

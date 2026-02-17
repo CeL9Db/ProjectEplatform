@@ -78,7 +78,7 @@ public class controller
 					   )
 	{
 		Client user = repos_client.findByEmail(email).orElse(null);
-		if(user != null && user.getPassword().equals(password))
+		if(user != null && cryptePass.matches(password, user.getPassword()))
 		{
 			System.out.println("User's successfully found.");
 			UserSession userSession = new UserSession(user.getNickname(), user.getEmail(), true);	// add a session
