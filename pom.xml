@@ -42,6 +42,12 @@
 	    <groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
+	<!-- tests : JUnit 5, Mockito, MockMvc -->
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-test</artifactId>
+	    <scope>test</scope>
+	</dependency>
 </dependencies>
 <build>
 	<plugins>
