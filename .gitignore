@@ -1,0 +1,21 @@
+# fichiers générés par Maven / la compilation
+target/
+build/
+
+# dépendances JavaScript (réinstallables avec npm install)
+node_modules/
+
+# fichiers de configuration des IDE
+.settings/
+.classpath
+.project
+.vscode/
+.idea/
+*.iml
+
+# fichiers système
+.DS_Store
+Thumbs.db
+
+# variables d'environnement locales
+.env
