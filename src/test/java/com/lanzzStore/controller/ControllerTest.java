@@ -112,4 +112,44 @@ class ControllerTest
 			.andExpect(view().name("index"))
 			.andExpect(model().attribute("selectedJeu", nullValue()));
 	}
+
+	// ---------- inscription ----------
+
+	@Test
+	void inscription_emailDejaUtilise_afficheUneErreur() throws Exception
+	{
+		when(repos_client.findByEmail("vlad@mail.fr"))
+			.thenReturn(Optional.of(creerClient("vlad", "vlad@mail.fr", "x")));
+
+		mockMvc.perform(post("/register")
+				.param("nickname", "autre")
+				.param("email", "vlad@mail.fr")
+				.param("password", "secret"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("register_page"))
+			.andExpect(model().attributeExists("error_inscription"));
+
+		verify(repos_client, never()).save(any());
+	}
+
+	@Test
+	void inscription_nouveauClient_motDePasseChiffreAvantEnregistrement() throws Exception
+	{
+		when(repos_client.findByEmail("nouveau@mail.fr")).thenReturn(Optional.empty());
+
+		mockMvc.perform(post("/register")
+				.param("nickname", "nouveau")
+				.param("email", "nouveau@mail.fr")
+				.param("password", "secret"))
+			.andExpect(view().name("redirect:/personalPage"));
+
+		// on récupère le client réellement envoyé au repository
+		ArgumentCaptor<Client> captor = ArgumentCaptor.forClass(Client.class);
+		verify(repos_client).save(captor.capture());
+		Client enregistre = captor.getValue();
+
+		assertEquals("nouveau", enregistre.getNickname());
+		assertNotEquals("secret", enregistre.getPassword());	// pas en clair
+		assertTrue(passwordEncoder.matches("secret", enregistre.getPassword()));
+	}
 }
