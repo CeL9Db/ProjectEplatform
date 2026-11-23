@@ -16,7 +16,8 @@ http://localhost:8080
 
 ### info utile
 - La base de données se crée automatiquement
-- Les tables se créent via Hibernate
+- Au premier démarrage, `init.sql` est chargé dans PostgreSQL (tables + jeux du catalogue)
+- `init.sql` n'est rechargé que si le volume est vide : pour repartir de zéro, `docker-compose down -v`
 - Créez un compte via **Register**
 
 ### enregistrement d'un nouveau compte
@@ -31,7 +32,7 @@ http://localhost:8080
 ### pgAdmin4 (données pour se connecter)
 ```
 Host:     localhost
-Port:     5432
+Port:     5433
 User:     postgres
 Password: 1234
 Database: register
