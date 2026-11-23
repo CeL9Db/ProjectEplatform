@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   app:
     build: .
@@ -6,33 +5,41 @@ services:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - DB_HOST=host.docker.internal
+      # "db" = nom du service PostgreSQL ci-dessous (réseau interne de Docker)
+      - DB_HOST=db
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=1234
     depends_on:
-      - db
+      db:
+        # on attend que PostgreSQL réponde vraiment, pas seulement que le conteneur soit lancé
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - app-network
+
   db:
-    image: postgres:15
+    # même version que celle du dump init.sql (PostgreSQL 18)
+    image: postgres:18
     environment:
       - POSTGRES_DB=register
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
+      # init.sql est exécuté automatiquement au premier démarrage (volume vide)
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     ports:
-      - "5432:5432"
+      # 5433 côté PC pour ne pas entrer en conflit avec un PostgreSQL déjà installé
+      - "5433:5432"
     restart: unless-stopped
     networks:
       - app-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
+      test: ["CMD-SHELL", "pg_isready -U postgres -d register"]
+      interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
 
 volumes:
   postgres_data:

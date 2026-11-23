@@ -1,4 +1,5 @@
-# Lance les tests JUnit à chaque push et à chaque pull request
+# Lance les tests JUnit et vérifie que l'application démarre avec Docker,
+# à chaque push et à chaque pull request
 name: Tests
 
 on:
@@ -20,3 +21,28 @@ jobs:
 
       - name: Lancer les tests
         run: mvn -B test
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Démarrer l'application et la base avec Docker Compose
+        run: docker compose up -d --build
+
+      - name: Attendre que la page d'accueil réponde
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost:8080/ > /dev/null; then
+              echo "L'application répond"
+              exit 0
+            fi
+            sleep 5
+          done
+          docker compose logs
+          exit 1
+
+      - name: Arrêter les conteneurs
+        if: always()
+        run: docker compose down -v
