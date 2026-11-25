@@ -152,4 +152,51 @@ class ControllerTest
 		assertNotEquals("secret", enregistre.getPassword());	// pas en clair
 		assertTrue(passwordEncoder.matches("secret", enregistre.getPassword()));
 	}
+
+	// ---------- connexion ----------
+
+	@Test
+	void connexion_bonMotDePasse_creeLaSessionUtilisateur() throws Exception
+	{
+		Client client = creerClient("vlad", "vlad@mail.fr", passwordEncoder.encode("secret"));
+		when(repos_client.findByEmail("vlad@mail.fr")).thenReturn(Optional.of(client));
+
+		MvcResult resultat = mockMvc.perform(post("/login")
+				.param("email", "vlad@mail.fr")
+				.param("password", "secret"))
+			.andExpect(view().name("redirect:/personalPage"))
+			.andReturn();
+
+		UserSession session = (UserSession) resultat.getRequest().getSession().getAttribute("userSession");
+		assertNotNull(session);
+		assertEquals("vlad", session.getNickname());
+		assertEquals("vlad@mail.fr", session.getEmail());
+		assertTrue(session.isLoged());
+	}
+
+	@Test
+	void connexion_mauvaisMotDePasse_pasDeSession() throws Exception
+	{
+		Client client = creerClient("vlad", "vlad@mail.fr", passwordEncoder.encode("secret"));
+		when(repos_client.findByEmail("vlad@mail.fr")).thenReturn(Optional.of(client));
+
+		MvcResult resultat = mockMvc.perform(post("/login")
+				.param("email", "vlad@mail.fr")
+				.param("password", "faux"))
+			.andExpect(view().name("redirect:/loginPage"))
+			.andReturn();
+
+		assertNull(resultat.getRequest().getSession().getAttribute("userSession"));
+	}
+
+	@Test
+	void connexion_emailInconnu_redirigeVersLaConnexion() throws Exception
+	{
+		when(repos_client.findByEmail("inconnu@mail.fr")).thenReturn(Optional.empty());
+
+		mockMvc.perform(post("/login")
+				.param("email", "inconnu@mail.fr")
+				.param("password", "secret"))
+			.andExpect(view().name("redirect:/loginPage"));
+	}
 }
